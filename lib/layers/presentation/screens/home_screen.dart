@@ -22,26 +22,8 @@ class HomeScreen extends StatelessWidget {
             const SellerStatement(),
             const MeetOurTeam(),
             const Highlight(),
-
-            // GetBuilder<HomeController>(
-            //   builder: (controller) {
-            //     return SearchJobs(
-            //       jobs: _homeController.jobs,
-            //       onSearch: _homeController.searchJobs,
-            //     );
-            //   },
-            // ),
-
-            Obx(
-              () {
-                print(
-                  'jobs_obx ${_homeController.jobs}',
-                );
-                return SearchJobs(
-                  jobs: _homeController.jobs,
-                  onSearch: _homeController.searchJobs,
-                );
-              },
+            SearchJobs(
+              controller: _homeController,
             ),
           ],
         ),

@@ -7,6 +7,7 @@ class HomeController extends GetxController {
 
   final JobsUsecase _jobsUsecase;
 
+  var isloading = false.obs;
   var jobs = <String, List<JobDto>>{}.obs;
 
   @override
@@ -16,13 +17,18 @@ class HomeController extends GetxController {
   }
 
   Future<void> searchJobs(String? query) async {
+    isloading.value = true;
+
     var response = await _jobsUsecase(query);
 
     if (response.success) {
-      jobs.value = response.body as Map<String, List<JobDto>>;
-      return;
+      jobs.assignAll(response.body as Map<String, List<JobDto>>);
     }
 
-    jobs.value = {};
+    if (!response.success) {
+      jobs.value = {};
+    }
+
+    isloading.value = false;
   }
 }

@@ -1,18 +1,18 @@
 import 'package:elo7_app/layers/presentation/components/jobs_by_type_card.dart';
+import 'package:elo7_app/layers/presentation/components/loading.dart';
+import 'package:elo7_app/layers/presentation/components/not_found_card.dart';
 import 'package:elo7_app/layers/presentation/components/search_field.dart';
+import 'package:elo7_app/layers/presentation/controller/home_controller.dart';
 import 'package:flutter/material.dart';
-
-import 'package:elo7_app/layers/domain/models/dto/job_dto.dart';
+import 'package:get/get.dart';
 
 class SearchJobs extends StatelessWidget {
   const SearchJobs({
     super.key,
-    required this.jobs,
-    required this.onSearch,
+    required this.controller,
   });
 
-  final Map<String, List<JobDto>> jobs;
-  final void Function(String text) onSearch;
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +28,28 @@ class SearchJobs extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 24),
             child: SearchField(
-              onSearch: onSearch,
+              onSearch: controller.searchJobs,
             ),
           ),
-          if (jobs.keys.isNotEmpty) _buildJobsList(context),
-          if (jobs.keys.isEmpty)
-            const Padding(
-              padding: EdgeInsets.only(top: 20.0),
-              child: Center(child: Text('Vagas não encontradas')),
-            )
+          Obx(
+            () {
+              if (controller.isloading.value) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 40),
+                  child: Loading(),
+                );
+              }
+
+              if (controller.jobs.keys.isNotEmpty) {
+                return _buildJobsList(context);
+              }
+
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 40.0),
+                child: NotFoundCard(message: 'Vagas não encontradas'),
+              );
+            },
+          )
         ],
       ),
     );
@@ -44,12 +57,12 @@ class SearchJobs extends StatelessWidget {
 
   Widget _buildJobsList(BuildContext context) {
     return ListView.builder(
-      itemCount: jobs.keys.length,
+      itemCount: controller.jobs.keys.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        var type = jobs.keys.elementAt(index);
-        var jobsByType = jobs[type]!;
+        var type = controller.jobs.keys.elementAt(index);
+        var jobsByType = controller.jobs[type]!;
 
         return JobsByTypeCard(jobs: jobsByType, type: type);
       },
