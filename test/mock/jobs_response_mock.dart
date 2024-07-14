@@ -21,5 +21,12 @@ var jobsResponseApiMock = {
       "location": null,
       "is_active": true
     },
+    {
+      "title": "pessoa engenheira de sre/devops",
+      "type": "engenharia",
+      "level": "senior",
+      "location": 'itapevi, sp, brasil',
+      "is_active": true
+    },
   ]
 };
