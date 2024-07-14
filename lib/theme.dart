@@ -40,11 +40,12 @@ class AppTheme {
           titleLarge: TextStyle(
               fontSize: 30, fontWeight: FontWeight.w800, color: blackDark)),
       inputDecorationTheme: InputDecorationTheme(
+        hintStyle: const TextStyle(color: lightGrey, fontSize: 16),
         enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: blackLight, width: 1.0),
+            borderSide: BorderSide(color: lightGrey, width: 1.0),
             borderRadius: BorderRadius.all(Radius.circular(8.0))),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: blackLight, width: 1),
+          borderSide: const BorderSide(color: lightGrey, width: 1),
           borderRadius: BorderRadius.circular(8.0),
         ),
       ),
