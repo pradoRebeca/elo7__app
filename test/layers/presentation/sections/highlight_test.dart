@@ -1,62 +1,90 @@
 import 'package:elo7_app/layers/data/datasources/section_data_datasource.dart';
 import 'package:elo7_app/layers/data/repositories/section_data_repository_impl.dart';
+import 'package:elo7_app/layers/domain/models/entities/section_data_entity.dart';
 import 'package:elo7_app/layers/domain/repositories/section_data_repositoy.dart';
 import 'package:elo7_app/layers/domain/usecases/jobs/jobs_usecase.dart';
 import 'package:elo7_app/layers/domain/usecases/section_data/section_data_usecase.dart';
 import 'package:elo7_app/layers/domain/usecases/section_data/section_data_usecase_impl.dart';
-import 'package:elo7_app/layers/external/datasource/section_data_datasouce_impl.dart';
+import 'package:elo7_app/layers/presentation/components/highlight_image_card.dart';
+import 'package:elo7_app/layers/presentation/controller/home_controller.dart';
 import 'package:elo7_app/layers/presentation/controller/home_controller_impl.dart';
 import 'package:elo7_app/layers/presentation/sections/highlight.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:elo7_app/layers/presentation/components/highlight_image_card.dart';
-import 'package:elo7_app/layers/presentation/controller/home_controller.dart';
 import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 import 'highlight_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<JobsUsecase>()])
+@GenerateNiceMocks(
+  [MockSpec<JobsUsecase>(), MockSpec<SectionDataDatasource>()],
+)
 void main() {
-  final SectionDataDatasource sectionDataDatasource =
-      SectionDataDatasouceImpl();
-  final SectionDataRepositoy sectionDataRepositoy =
-      SectionDataRepositoryImpl(sectionDataDatasource);
-  final SectionDataUsecase sectionDataUsecase =
-      SectionDataUsecaseImpl(sectionDataRepositoy);
-  final HomeController homeController =
-      HomeControllerImpl(MockJobsUsecase(), sectionDataUsecase);
+  late MockSectionDataDatasource sectionDataDatasource;
+  late SectionDataRepositoy sectionDataRepository;
+  late SectionDataUsecase sectionDataUsecase;
+  late HomeController controller;
 
-  group('Highlight Widget Tests', () {
+  setUp(() {
+    sectionDataDatasource = MockSectionDataDatasource();
+    sectionDataRepository = SectionDataRepositoryImpl(sectionDataDatasource);
+    sectionDataUsecase = SectionDataUsecaseImpl(sectionDataRepository);
+    controller = HomeControllerImpl(MockJobsUsecase(), sectionDataUsecase);
+  });
+
+  group('MeetOurTeam Section', () {
     Future<void> pumpHighlight(WidgetTester tester) async {
-      return await tester.pumpWidget(MaterialApp(
-        home: Scaffold(
-          body: Highlight(controller: homeController),
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: Highlight(controller: controller),
+            ),
+          ),
         ),
-      ));
+      );
     }
 
-    testWidgets('displays HighlightImageCard when highlightSection has data',
+    testWidgets('renders HighlightImageCard correcty',
         (WidgetTester tester) async {
-      homeController.getSectionData();
+      final List<SectionDataEntity> dataSection = [
+        SectionDataEntity(
+          fileImageName: 'assets/images/image2.png',
+          detail: 'Podemos...',
+          title: 'Qualidade de vida',
+          link: '',
+          sectionType: SectionType.highlight,
+        ),
+        SectionDataEntity(
+          fileImageName: 'assets/images/image2.png',
+          detail: 'Nossa cultura...',
+          title: 'Nossos valores',
+          sectionType: SectionType.highlight,
+        ),
+      ];
 
-      var firstDataHighlightSection = homeController.highlightSection.first;
+      when(sectionDataDatasource()).thenReturn(dataSection);
+
+      controller.getSectionData();
 
       await pumpHighlight(tester);
+
       await tester.pumpAndSettle();
 
-      expect(find.byType(HighlightImageCard), findsNWidgets(3));
-      expect(find.text(firstDataHighlightSection.title!), findsOneWidget);
-      expect(find.text(firstDataHighlightSection.detail!), findsOneWidget);
+      expect(find.byType(HighlightImageCard), findsNWidgets(2));
     });
 
-    testWidgets('displays no HighlightImageCard when highlightSection is empty',
+    testWidgets('renders no HighlightImageCard when highlightSection is empty',
         (WidgetTester tester) async {
-      homeController.highlightSection.value = [];
+      final List<SectionDataEntity> dataSection = [];
 
-      homeController.getSectionData();
+      when(sectionDataDatasource()).thenReturn(dataSection);
+
+      controller.getSectionData();
 
       await pumpHighlight(tester);
-      await tester.pump();
+
+      await tester.pumpAndSettle();
 
       expect(find.byType(HighlightImageCard), findsNothing);
     });

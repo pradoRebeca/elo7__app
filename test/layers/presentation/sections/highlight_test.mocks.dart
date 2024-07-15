@@ -5,6 +5,10 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
+import 'package:elo7_app/layers/data/datasources/section_data_datasource.dart'
+    as _i5;
+import 'package:elo7_app/layers/domain/models/entities/section_data_entity.dart'
+    as _i6;
 import 'package:elo7_app/layers/domain/usecases/jobs/jobs_usecase.dart' as _i3;
 import 'package:elo7_app/layers/shared/response_presentation.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -61,4 +65,20 @@ class MockJobsUsecase extends _i1.Mock implements _i3.JobsUsecase {
           ),
         )),
       ) as _i4.Future<_i2.ResponsePresentation>);
+}
+
+/// A class which mocks [SectionDataDatasource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSectionDataDatasource extends _i1.Mock
+    implements _i5.SectionDataDatasource {
+  @override
+  List<_i6.SectionDataEntity> call() => (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [],
+        ),
+        returnValue: <_i6.SectionDataEntity>[],
+        returnValueForMissingStub: <_i6.SectionDataEntity>[],
+      ) as List<_i6.SectionDataEntity>);
 }
