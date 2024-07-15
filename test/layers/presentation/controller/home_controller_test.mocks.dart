@@ -6,6 +6,10 @@
 import 'dart:async' as _i3;
 
 import 'package:elo7_app/layers/data/datasources/jobs_datasource.dart' as _i2;
+import 'package:elo7_app/layers/data/datasources/section_data_datasource.dart'
+    as _i4;
+import 'package:elo7_app/layers/domain/models/entities/section_data_entity.dart'
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -36,4 +40,20 @@ class MockJobsDatasource extends _i1.Mock implements _i2.JobsDatasource {
         returnValueForMissingStub:
             _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
       ) as _i3.Future<Map<String, dynamic>>);
+}
+
+/// A class which mocks [SectionDataDatasource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSectionDataDatasource extends _i1.Mock
+    implements _i4.SectionDataDatasource {
+  @override
+  List<_i5.SectionDataEntity> call() => (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [],
+        ),
+        returnValue: <_i5.SectionDataEntity>[],
+        returnValueForMissingStub: <_i5.SectionDataEntity>[],
+      ) as List<_i5.SectionDataEntity>);
 }

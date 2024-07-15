@@ -8,7 +8,7 @@ import 'package:elo7_app/layers/domain/repositories/section_data_repositoy.dart'
 import 'package:elo7_app/layers/domain/usecases/jobs/jobs_usecase_impl.dart';
 import 'package:elo7_app/layers/domain/usecases/section_data/section_data_usecase.dart';
 import 'package:elo7_app/layers/domain/usecases/section_data/section_data_usecase_impl.dart';
-import 'package:elo7_app/layers/external/datasource/section_data_datasouce_impl.dart';
+import 'package:elo7_app/layers/external/static_data/sections_data.dart';
 import 'package:elo7_app/layers/presentation/controller/home_controller_impl.dart';
 import 'package:elo7_app/layers/shared/utils/job_formatter.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,21 +19,29 @@ import 'package:elo7_app/layers/domain/usecases/jobs/jobs_usecase.dart';
 import '../../../mock/jobs_response_mock.dart';
 import 'home_controller_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<JobsDatasource>()])
+@GenerateNiceMocks(
+    [MockSpec<JobsDatasource>(), MockSpec<SectionDataDatasource>()])
 void main() {
-  final SectionDataDatasource sectionDataDatasource =
-      SectionDataDatasouceImpl();
-  final SectionDataRepositoy sectionDataRepositoy =
-      SectionDataRepositoryImpl(sectionDataDatasource);
-  final SectionDataUsecase sectionDataUsecase =
-      SectionDataUsecaseImpl(sectionDataRepositoy);
+  late SectionDataDatasource sectionDataDatasource;
+  late SectionDataRepositoy sectionDataRepository;
+  late SectionDataUsecase sectionDataUsecase;
+  late HomeControllerImpl homeController;
 
-  final JobsDatasource jobsDatasource = MockJobsDatasource();
-  final JobsRepository jobsRepository = JobsRepositoryImpl(jobsDatasource);
-  final JobsUsecase jobsUsecase =
-      JobsUsecaseImpl(jobsRepository, JobFormatter());
-  final HomeControllerImpl homeController =
-      HomeControllerImpl(jobsUsecase, sectionDataUsecase);
+  late JobsDatasource jobsDatasource;
+  late JobsRepository jobsRepository;
+  late JobsUsecase jobsUsecase;
+
+  setUp(() {
+    sectionDataDatasource = MockSectionDataDatasource();
+    sectionDataRepository = SectionDataRepositoryImpl(sectionDataDatasource);
+    sectionDataUsecase = SectionDataUsecaseImpl(sectionDataRepository);
+
+    jobsDatasource = MockJobsDatasource();
+    jobsRepository = JobsRepositoryImpl(jobsDatasource);
+    jobsUsecase = JobsUsecaseImpl(jobsRepository, JobFormatter());
+
+    homeController = HomeControllerImpl(jobsUsecase, sectionDataUsecase);
+  });
 
   group('HomeController - Jobs Tests', () {
     test('should call JobsUsecase onInit', () async {
@@ -78,6 +86,8 @@ void main() {
     });
 
     test('should load quantity section data correctly', () {
+      when(sectionDataDatasource()).thenReturn(sectionDataEntityList);
+
       homeController.getSectionData();
 
       expect(homeController.meetOurTeamSection.length, 4);

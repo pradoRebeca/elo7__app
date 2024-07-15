@@ -39,7 +39,7 @@ class InitialBinding extends Bindings {
 
   void _bindJobsController() {
     Get.lazyPut<JobsDatasource>(
-      () => JobsDatasourceImpl(HttpClientAdapter()),
+      () => JobsDatasourceImpl(HttpCustomClientAdapter()),
     );
     Get.lazyPut<JobsRepository>(
       () => JobsRepositoryImpl(Get.find()),

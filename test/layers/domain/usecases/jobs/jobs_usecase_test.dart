@@ -14,10 +14,15 @@ import 'jobs_usecase_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<JobsDatasource>()])
 void main() {
-  late final JobsDatasource jobsDatasource = MockJobsDatasource();
-  final JobsRepository jobsRepository = JobsRepositoryImpl(jobsDatasource);
-  final JobsUsecase jobsUsecase =
-      JobsUsecaseImpl(jobsRepository, JobFormatter());
+  late JobsDatasource jobsDatasource;
+  late JobsRepository jobsRepository;
+  late JobsUsecase jobsUsecase;
+
+  setUp(() {
+    jobsDatasource = MockJobsDatasource();
+    jobsRepository = JobsRepositoryImpl(jobsDatasource);
+    jobsUsecase = JobsUsecaseImpl(jobsRepository, JobFormatter());
+  });
 
   group(
     'Jobs Usecase - Function call',

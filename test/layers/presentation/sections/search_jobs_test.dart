@@ -20,16 +20,24 @@ import 'package:mockito/mockito.dart';
 import '../../../mock/jobs_response_mock.dart';
 import 'search_jobs_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<JobsDatasource>(), MockSpec<SectionDataUsecase>()])
+@GenerateNiceMocks([
+  MockSpec<JobsDatasource>(),
+  MockSpec<SectionDataUsecase>(),
+])
 void main() {
-  group('SearchJobs Widget', () {
-    late final JobsDatasource jobsDatasource = MockJobsDatasource();
-    final JobsRepository jobsRepository = JobsRepositoryImpl(jobsDatasource);
-    final JobsUsecase jobsUsecase =
-        JobsUsecaseImpl(jobsRepository, JobFormatter());
-    final HomeController controller =
-        HomeControllerImpl(jobsUsecase, MockSectionDataUsecase());
+  late JobsDatasource jobsDatasource;
+  late JobsRepository jobsRepository;
+  late JobsUsecase jobsUsecase;
+  late HomeController controller;
 
+  setUp(() {
+    jobsDatasource = MockJobsDatasource();
+    jobsRepository = JobsRepositoryImpl(jobsDatasource);
+    jobsUsecase = JobsUsecaseImpl(jobsRepository, JobFormatter());
+    controller = HomeControllerImpl(jobsUsecase, MockSectionDataUsecase());
+  });
+
+  group('SearchJobs Widget', () {
     Future<void> pumpSearchJobSection(WidgetTester tester) async {
       await tester.pumpWidget(
         GetMaterialApp(
@@ -56,6 +64,8 @@ void main() {
       await controller.searchJobs(null);
 
       await pumpSearchJobSection(tester);
+
+      await tester.pumpAndSettle();
 
       expect(find.byType(JobsByTypeCard), findsNWidgets(3));
     });

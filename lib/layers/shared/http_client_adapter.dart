@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
-class HttpClientAdapter {
-  HttpClientAdapter() {
+class HttpCustomClientAdapter {
+  HttpCustomClientAdapter() {
     client.options.baseUrl = "https://img.elo7.com.br/";
   }
 
