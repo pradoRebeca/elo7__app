@@ -18,13 +18,14 @@ class HomeControllerImpl extends GetxController implements HomeController {
   var jobs = <String, List<JobDto>>{}.obs;
 
   @override
-  var workWithUsSection =
-      SectionDataEntity(sectionType: SectionType.workWithUs).obs;
+  var highlightSection = <SectionDataEntity>[].obs;
 
   @override
-  var highlightSection = <SectionDataEntity>[].obs;
-  @override
   var meetOurTeamSection = <SectionDataEntity>[].obs;
+
+  @override
+  var workWithUsSection =
+      SectionDataEntity(sectionType: SectionType.workWithUs).obs;
 
   @override
   var sellerStatementSection =
@@ -39,29 +40,55 @@ class HomeControllerImpl extends GetxController implements HomeController {
 
   @override
   void getSectionData() {
-    var workWithUsSectionResponse = _sectionDataUsecase(SectionType.workWithUs);
-    workWithUsSection.value =
-        (workWithUsSectionResponse.body as List<SectionDataEntity>).isNotEmpty
-            ? (workWithUsSectionResponse.body as List<SectionDataEntity>).first
-            : workWithUsSection.value;
+    _fetchSectionData(
+        SectionType.workWithUs,
+        (data) => workWithUsSection.value =
+            data.isNotEmpty ? data.first : workWithUsSection.value);
 
-    var meetOurTeamSectionResponse =
-        _sectionDataUsecase(SectionType.meetOurTeam);
-    meetOurTeamSection
-        .assignAll(meetOurTeamSectionResponse.body as List<SectionDataEntity>);
+    _fetchSectionData(
+        SectionType.sellerStatement,
+        (data) => sellerStatementSection.value =
+            data.isNotEmpty ? data.first : sellerStatementSection.value);
 
-    var sellerStatementSectionResponse =
-        _sectionDataUsecase(SectionType.sellerStatement);
-    sellerStatementSection.value = (sellerStatementSectionResponse.body
-                as List<SectionDataEntity>)
-            .isNotEmpty
-        ? (sellerStatementSectionResponse.body as List<SectionDataEntity>).first
-        : sellerStatementSection.value;
+    _fetchSectionData(
+        SectionType.meetOurTeam, (data) => meetOurTeamSection.assignAll(data));
 
-    var highlightSectionResponse = _sectionDataUsecase(SectionType.highlight);
-    highlightSection
-        .assignAll(highlightSectionResponse.body as List<SectionDataEntity>);
+    _fetchSectionData(
+        SectionType.highlight, (data) => highlightSection.assignAll(data));
   }
+
+  void _fetchSectionData(SectionType sectionType,
+      Function(List<SectionDataEntity>) updateSection) {
+    var response = _sectionDataUsecase(sectionType);
+    var data = response.body as List<SectionDataEntity>;
+    updateSection(data);
+  }
+
+  // @override
+  // void getSectionData() {
+  //   var workWithUsSectionResponse = _sectionDataUsecase(SectionType.workWithUs);
+  //   workWithUsSection.value =
+  //       (workWithUsSectionResponse.body as List<SectionDataEntity>).isNotEmpty
+  //           ? (workWithUsSectionResponse.body as List<SectionDataEntity>).first
+  //           : workWithUsSection.value;
+
+  //   var meetOurTeamSectionResponse =
+  //       _sectionDataUsecase(SectionType.meetOurTeam);
+  //   meetOurTeamSection
+  //       .assignAll(meetOurTeamSectionResponse.body as List<SectionDataEntity>);
+
+  //   var sellerStatementSectionResponse =
+  //       _sectionDataUsecase(SectionType.sellerStatement);
+  //   sellerStatementSection.value = (sellerStatementSectionResponse.body
+  //               as List<SectionDataEntity>)
+  //           .isNotEmpty
+  //       ? (sellerStatementSectionResponse.body as List<SectionDataEntity>).first
+  //       : sellerStatementSection.value;
+
+  //   var highlightSectionResponse = _sectionDataUsecase(SectionType.highlight);
+  //   highlightSection
+  //       .assignAll(highlightSectionResponse.body as List<SectionDataEntity>);
+  // }
 
   @override
   Future<void> searchJobs(String? query) async {
