@@ -44,6 +44,7 @@ class WorkWithUs extends StatelessWidget {
       width: double.infinity,
       height: 260,
       child: Stack(
+        fit: StackFit.expand,
         children: [
           const ImageCard(pathImage: 'assets/images/sellers/team.png'),
           Container(
