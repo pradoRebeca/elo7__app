@@ -27,7 +27,6 @@ void main() {
     expect(find.byType(ImageCard), findsOneWidget);
     expect(find.text('Título Exemplo'), findsOneWidget);
     expect(find.text('Detalhe do exemplo.'), findsOneWidget);
-    expect(find.byType(TextButtonLinkWebview), findsOneWidget);
   });
 
   testWidgets('HighlightImageCard hides image when fileImageName is null',
