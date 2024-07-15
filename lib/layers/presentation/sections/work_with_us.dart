@@ -61,11 +61,22 @@ class WorkWithUs extends StatelessWidget {
 
   Widget _buildDetailSection(BuildContext context) {
     return Obx(
-      () => Text(
-        controller.workWithUsSection.value.detail ?? 'Venha fazer parte!',
-        style: Theme.of(context).textTheme.bodySmall,
-        textAlign: TextAlign.center,
-      ),
+      () {
+        final String? detail = controller.workWithUsSection.value.detail;
+        if (detail != null && detail.isNotEmpty) {
+          return Text(
+            detail,
+            style: Theme.of(context).textTheme.bodySmall,
+            textAlign: TextAlign.center,
+          );
+        }
+
+        return Text(
+          'Venha fazer parte!',
+          style: Theme.of(context).textTheme.bodySmall,
+          textAlign: TextAlign.center,
+        );
+      },
     );
   }
 
