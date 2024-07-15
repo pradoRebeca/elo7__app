@@ -3,10 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i3;
+import 'dart:typed_data' as _i5;
 
-import 'package:dio/dio.dart' as _i2;
-import 'package:elo7_app/layers/shared/http_client_adapter.dart' as _i3;
+import 'package:dio/src/adapter.dart' as _i2;
+import 'package:dio/src/options.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -22,18 +23,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeDio_0 extends _i1.SmartFake implements _i2.Dio {
-  _FakeDio_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeResponse_1<T> extends _i1.SmartFake implements _i2.Response<T> {
-  _FakeResponse_1(
+class _FakeResponseBody_0 extends _i1.SmartFake implements _i2.ResponseBody {
+  _FakeResponseBody_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -45,58 +36,54 @@ class _FakeResponse_1<T> extends _i1.SmartFake implements _i2.Response<T> {
 /// A class which mocks [HttpClientAdapter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHttpClientAdapter extends _i1.Mock implements _i3.HttpClientAdapter {
-  MockHttpClientAdapter() {
-    _i1.throwOnMissingStub(this);
-  }
-
+class MockHttpClientAdapter extends _i1.Mock implements _i2.HttpClientAdapter {
   @override
-  _i2.Dio get client => (super.noSuchMethod(
-        Invocation.getter(#client),
-        returnValue: _FakeDio_0(
-          this,
-          Invocation.getter(#client),
-        ),
-      ) as _i2.Dio);
-
-  @override
-  _i4.Future<_i2.Response<dynamic>> get(
-    String? path, {
-    Object? data,
-    Map<String, dynamic>? queryParameters,
-    _i2.Options? options,
-    _i2.CancelToken? cancelToken,
-    void Function(
-      int,
-      int,
-    )? onReceiveProgress,
-  }) =>
+  _i3.Future<_i2.ResponseBody> fetch(
+    _i4.RequestOptions? options,
+    _i3.Stream<_i5.Uint8List>? requestStream,
+    _i3.Future<void>? cancelFuture,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
-          #get,
-          [path],
-          {
-            #data: data,
-            #queryParameters: queryParameters,
-            #options: options,
-            #cancelToken: cancelToken,
-            #onReceiveProgress: onReceiveProgress,
-          },
+          #fetch,
+          [
+            options,
+            requestStream,
+            cancelFuture,
+          ],
         ),
-        returnValue:
-            _i4.Future<_i2.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
+        returnValue: _i3.Future<_i2.ResponseBody>.value(_FakeResponseBody_0(
           this,
           Invocation.method(
-            #get,
-            [path],
-            {
-              #data: data,
-              #queryParameters: queryParameters,
-              #options: options,
-              #cancelToken: cancelToken,
-              #onReceiveProgress: onReceiveProgress,
-            },
+            #fetch,
+            [
+              options,
+              requestStream,
+              cancelFuture,
+            ],
           ),
         )),
-      ) as _i4.Future<_i2.Response<dynamic>>);
+        returnValueForMissingStub:
+            _i3.Future<_i2.ResponseBody>.value(_FakeResponseBody_0(
+          this,
+          Invocation.method(
+            #fetch,
+            [
+              options,
+              requestStream,
+              cancelFuture,
+            ],
+          ),
+        )),
+      ) as _i3.Future<_i2.ResponseBody>);
+
+  @override
+  void close({bool? force = false}) => super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+          {#force: force},
+        ),
+        returnValueForMissingStub: null,
+      );
 }

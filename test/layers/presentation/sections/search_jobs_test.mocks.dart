@@ -3,9 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
-import 'package:elo7_app/layers/data/datasources/jobs_datasource.dart' as _i2;
+import 'package:elo7_app/layers/data/datasources/jobs_datasource.dart' as _i3;
+import 'package:elo7_app/layers/domain/models/entities/section_data_entity.dart'
+    as _i6;
+import 'package:elo7_app/layers/domain/usecases/section_data/section_data_usecase.dart'
+    as _i5;
+import 'package:elo7_app/layers/shared/response_presentation.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -21,19 +26,59 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeResponsePresentation_0 extends _i1.SmartFake
+    implements _i2.ResponsePresentation {
+  _FakeResponsePresentation_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [JobsDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockJobsDatasource extends _i1.Mock implements _i2.JobsDatasource {
+class MockJobsDatasource extends _i1.Mock implements _i3.JobsDatasource {
   @override
-  _i3.Future<Map<String, dynamic>> call() => (super.noSuchMethod(
+  _i4.Future<Map<String, dynamic>> call() => (super.noSuchMethod(
         Invocation.method(
           #call,
           [],
         ),
         returnValue:
-            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+            _i4.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
         returnValueForMissingStub:
-            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
-      ) as _i3.Future<Map<String, dynamic>>);
+            _i4.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i4.Future<Map<String, dynamic>>);
+}
+
+/// A class which mocks [SectionDataUsecase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSectionDataUsecase extends _i1.Mock
+    implements _i5.SectionDataUsecase {
+  @override
+  _i2.ResponsePresentation call(_i6.SectionType? sectionType) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [sectionType],
+        ),
+        returnValue: _FakeResponsePresentation_0(
+          this,
+          Invocation.method(
+            #call,
+            [sectionType],
+          ),
+        ),
+        returnValueForMissingStub: _FakeResponsePresentation_0(
+          this,
+          Invocation.method(
+            #call,
+            [sectionType],
+          ),
+        ),
+      ) as _i2.ResponsePresentation);
 }

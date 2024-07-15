@@ -11,6 +11,7 @@ import 'package:elo7_app/layers/domain/usecases/section_data/section_data_usecas
 import 'package:elo7_app/layers/external/datasource/jobs_datasource_impl.dart';
 import 'package:elo7_app/layers/external/datasource/section_data_datasouce_impl.dart';
 import 'package:elo7_app/layers/presentation/controller/home_controller.dart';
+import 'package:elo7_app/layers/presentation/controller/home_controller_impl.dart';
 import 'package:elo7_app/layers/shared/http_client_adapter.dart';
 import 'package:elo7_app/layers/shared/utils/job_formatter.dart';
 import 'package:get/get.dart';
@@ -47,7 +48,7 @@ class InitialBinding extends Bindings {
       () => JobsUsecaseImpl(Get.find(), JobFormatter()),
     );
     Get.lazyPut<HomeController>(
-      () => HomeController(
+      () => HomeControllerImpl(
         Get.find(),
         Get.find(),
       ),
