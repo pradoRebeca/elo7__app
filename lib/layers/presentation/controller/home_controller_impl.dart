@@ -64,32 +64,6 @@ class HomeControllerImpl extends GetxController implements HomeController {
     updateSection(data);
   }
 
-  // @override
-  // void getSectionData() {
-  //   var workWithUsSectionResponse = _sectionDataUsecase(SectionType.workWithUs);
-  //   workWithUsSection.value =
-  //       (workWithUsSectionResponse.body as List<SectionDataEntity>).isNotEmpty
-  //           ? (workWithUsSectionResponse.body as List<SectionDataEntity>).first
-  //           : workWithUsSection.value;
-
-  //   var meetOurTeamSectionResponse =
-  //       _sectionDataUsecase(SectionType.meetOurTeam);
-  //   meetOurTeamSection
-  //       .assignAll(meetOurTeamSectionResponse.body as List<SectionDataEntity>);
-
-  //   var sellerStatementSectionResponse =
-  //       _sectionDataUsecase(SectionType.sellerStatement);
-  //   sellerStatementSection.value = (sellerStatementSectionResponse.body
-  //               as List<SectionDataEntity>)
-  //           .isNotEmpty
-  //       ? (sellerStatementSectionResponse.body as List<SectionDataEntity>).first
-  //       : sellerStatementSection.value;
-
-  //   var highlightSectionResponse = _sectionDataUsecase(SectionType.highlight);
-  //   highlightSection
-  //       .assignAll(highlightSectionResponse.body as List<SectionDataEntity>);
-  // }
-
   @override
   Future<void> searchJobs(String? query) async {
     isloading.value = true;

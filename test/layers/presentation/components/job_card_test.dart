@@ -52,7 +52,6 @@ void main() {
         isActive: true,
       );
 
-      // Act
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

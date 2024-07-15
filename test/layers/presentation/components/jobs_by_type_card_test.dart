@@ -13,7 +13,6 @@ void main() {
       JobDto(title: 'Job 2', type: 'Type A', level: 'Junior', isActive: false),
     ];
 
-    // Act
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -22,7 +21,6 @@ void main() {
       ),
     );
 
-    // Assert
     expect(find.text(type), findsOneWidget);
   });
 

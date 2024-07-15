@@ -56,7 +56,7 @@ class SearchJobs extends StatelessWidget {
     } else {
       return const Padding(
         padding: EdgeInsets.symmetric(vertical: 40),
-        child: NotFoundCard(message: 'Vagas não encontradas'),
+        child: NotFoundCard(message: 'Vaga não encontrada'),
       );
     }
   }

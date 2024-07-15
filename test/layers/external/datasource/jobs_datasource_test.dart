@@ -26,10 +26,8 @@ void main() {
             data: jobsResponseApiMock, requestOptions: RequestOptions()),
       );
 
-      // Act
       final result = await datasource.call();
 
-      // Assert
       expect(result, jobsResponseApiMock);
       verify(mockHttpClientAdapter.get('/mock-vagas.json')).called(1);
     });
