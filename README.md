@@ -2,6 +2,8 @@
 
 O Elo7 App  permite que os usuários visualizem informações sobre a empresa, além de ser possível pesquisar por vagas.
 
+**As Informações sobre a empresa foram coletadas através do [Site Offcial Elo7](https://www.elo7.com.br/sobre) e da pagina de vagas Elo7 pela [Gupy](https://elo7.gupy.io/)**
+
 ### 📋 Pré-requisitos
 
 * [Flutter](https://docs.flutter.dev/get-started/install)
