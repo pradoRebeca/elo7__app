@@ -18,10 +18,12 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const WorkWithUs(),
-            const SellerStatement(),
-            const MeetOurTeam(),
-            const Highlight(),
+            WorkWithUs(
+              controller: _homeController,
+            ),
+            SellerStatement(controller: _homeController),
+            MeetOurTeam(controller: _homeController),
+            Highlight(controller: _homeController),
             SearchJobs(
               controller: _homeController,
             ),

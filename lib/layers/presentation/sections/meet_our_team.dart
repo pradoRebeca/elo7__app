@@ -1,78 +1,48 @@
+import 'package:elo7_app/layers/presentation/components/image_card.dart';
+import 'package:elo7_app/layers/presentation/components/title_section.dart';
+import 'package:elo7_app/layers/presentation/controller/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MeetOurTeam extends StatelessWidget {
-  const MeetOurTeam({super.key});
+  const MeetOurTeam({super.key, required this.controller});
+
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 30),
-            child: Text(
-              'Conheça nosso time fora de série',
-              style: Theme.of(context).textTheme.titleLarge,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 24),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: SizedBox(
-                width: double.infinity,
-                height: 183,
-                child: Image.asset(
-                  'assets/images/sellers/seller_1.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 24),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: SizedBox(
-                width: double.infinity,
-                height: 183,
-                child: Image.asset(
-                  'assets/images/sellers/seller_4.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 24),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: SizedBox(
-                width: double.infinity,
-                height: 183,
-                child: Image.asset(
-                  'assets/images/sellers/seller_2.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: SizedBox(
-              width: double.infinity,
-              height: 183,
-              child: Image.asset(
-                'assets/images/sellers/seller_3.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ],
-      ),
+      child: Column(mainAxisSize: MainAxisSize.min, children: [
+        const TitleSection(
+          title: 'Conheça nosso time fora de série',
+          textAlign: TextAlign.center,
+        ),
+        Obx(() => _buildTeamList()),
+      ]),
+    );
+  }
+
+  Widget _buildTeamList() {
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        final pathImage = controller.meetOurTeamSection[index].fileImageName;
+        if (pathImage != null && pathImage.isNotEmpty) {
+          return _buildTeamImage(pathImage);
+        }
+        return const SizedBox.shrink();
+      },
+      separatorBuilder: (context, index) => const SizedBox(height: 24),
+      itemCount: controller.meetOurTeamSection.length,
+    );
+  }
+
+  Widget _buildTeamImage(String pathImage) {
+    return SizedBox(
+      height: 183,
+      child: ImageCard(pathImage: 'assets/images/$pathImage', borderRadius: 16),
     );
   }
 }

@@ -1,7 +1,12 @@
+import 'package:elo7_app/layers/presentation/components/image_card.dart';
+import 'package:elo7_app/layers/presentation/controller/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SellerStatement extends StatelessWidget {
-  const SellerStatement({super.key});
+  const SellerStatement({super.key, required this.controller});
+
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -12,34 +17,51 @@ class SellerStatement extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
-            height: 260,
-            child: Image.asset(
-              'assets/images/sellers/seller_artisan.png',
-              fit: BoxFit.cover,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 40),
-            child: Text(
-              'Palavra da vendedora',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-          ),
-          Text(
-            'Sed rutrum condimentum',
-            style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
-                fontWeight: FontWeight.w600),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 24),
-            child: Text(
-              'Donec in vestibulum elit. Aliquam finibus facilisis elit, sit amet malesuada nibh tempor sed. Aliquam consequat ultrices fringilla. Sed id quam sollicitudin mi ultricies feugiat a vel velit. Pellentesque finibus vel tortor sed hendrerit. Vestibulum eu sem sapien. Nullam mollis, leo ut finibus euismod, arcu eros aliquam augue, in congue neque nulla vehicula purus.',
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ),
+          _buildImageSection(),
+          const SizedBox(height: 40),
+          _buildTitle(context),
+          _buildSellerTitle(context),
+          const SizedBox(height: 24),
+          _buildSellerDetail(context),
         ],
+      ),
+    );
+  }
+
+  Widget _buildImageSection() {
+    return const SizedBox(
+      height: 260,
+      child: ImageCard(
+        pathImage: 'assets/images/sellers/seller_artisan.png',
+        borderRadius: 16,
+      ),
+    );
+  }
+
+  Widget _buildTitle(BuildContext context) {
+    return Text(
+      'Palavra da vendedora',
+      style: Theme.of(context).textTheme.titleMedium,
+    );
+  }
+
+  Widget _buildSellerTitle(BuildContext context) {
+    return Obx(
+      () => Text(
+        controller.sellerStatementSection.value.title ?? '',
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSellerDetail(BuildContext context) {
+    return Obx(
+      () => Text(
+        controller.sellerStatementSection.value.detail ?? '',
+        style: Theme.of(context).textTheme.bodySmall,
       ),
     );
   }
