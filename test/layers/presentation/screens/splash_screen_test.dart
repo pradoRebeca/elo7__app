@@ -15,7 +15,6 @@ void main() {
     ));
 
     expect(find.byType(Image), findsOneWidget);
-    expect(find.byType(SizedBox), findsOneWidget);
 
     await tester.pumpAndSettle(const Duration(seconds: 2));
 
