@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class ImageCard extends StatelessWidget {
   const ImageCard({
@@ -17,6 +17,11 @@ class ImageCard extends StatelessWidget {
       child: Image.asset(
         pathImage,
         fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return Container(
+            color: Theme.of(context).colorScheme.onSurface,
+          );
+        },
       ),
     );
   }

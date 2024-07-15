@@ -22,7 +22,6 @@ class JobsByTypeCard extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
-
         ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -32,22 +31,6 @@ class JobsByTypeCard extends StatelessWidget {
           separatorBuilder: (context, index) => const CustomDivider(),
           itemCount: jobs.length,
         ),
-
-        // ...jobsByType.map((job) {
-        //   return Column(
-        //     mainAxisSize: MainAxisSize.min,
-        //     children: [
-        //       ListTile(
-        //         title: JobCard(jobDto: job),
-        //       ),
-        //       // Adiciona um divisor entre os grupos
-        //       const Padding(
-        //         padding: EdgeInsets.symmetric(vertical: 10),
-        //         child: CustomDivider(),
-        //       ),
-        //     ],
-        //   );
-        // })
       ],
     );
   }

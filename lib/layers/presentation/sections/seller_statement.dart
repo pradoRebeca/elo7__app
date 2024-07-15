@@ -46,23 +46,36 @@ class SellerStatement extends StatelessWidget {
   }
 
   Widget _buildSellerTitle(BuildContext context) {
-    return Obx(
-      () => Text(
-        controller.sellerStatementSection.value.title ?? '',
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
+    return Obx(() {
+      final String? title = controller.sellerStatementSection.value.title;
+
+      if (title != null && title.isNotEmpty) {
+        return Text(
+          title,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
+            fontWeight: FontWeight.w600,
+          ),
+        );
+      }
+
+      return const SizedBox.shrink();
+    });
   }
 
   Widget _buildSellerDetail(BuildContext context) {
     return Obx(
-      () => Text(
-        controller.sellerStatementSection.value.detail ?? '',
-        style: Theme.of(context).textTheme.bodySmall,
-      ),
+      () {
+        final String? detail = controller.sellerStatementSection.value.detail;
+        if (detail != null && detail.isNotEmpty) {
+          return Text(
+            detail,
+            style: Theme.of(context).textTheme.bodySmall,
+          );
+        }
+
+        return const SizedBox.shrink();
+      },
     );
   }
 }
