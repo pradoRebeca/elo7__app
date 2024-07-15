@@ -1,4 +1,4 @@
-import 'package:elo7_app/layers/presentation/components/title_link_webview.dart';
+import 'package:elo7_app/layers/presentation/components/text_button_link_webview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,7 +9,7 @@ void main() {
     await tester.pumpWidget(
       const MaterialApp(
         home: Scaffold(
-          body: TitleLinkWebview(title: title),
+          body: TextButtonLinkWebview(title: title),
         ),
       ),
     );

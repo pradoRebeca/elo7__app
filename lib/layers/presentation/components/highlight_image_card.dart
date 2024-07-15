@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:elo7_app/layers/domain/models/entities/section_data_entity.dart';
 import 'package:elo7_app/layers/presentation/components/image_card.dart';
-import 'package:elo7_app/layers/presentation/components/title_link_webview.dart';
+import 'package:elo7_app/layers/presentation/components/text_button_link_webview.dart';
 
 class HighlightImageCard extends StatelessWidget {
   const HighlightImageCard({
@@ -76,10 +76,14 @@ class HighlightImageCard extends StatelessWidget {
   }
 
   Widget _buildLinkSection() {
-    if (sectionDataEntity.link != null) {
-      return const Padding(
-        padding: EdgeInsets.only(top: 24),
-        child: TitleLinkWebview(title: 'saiba mais'),
+    if (sectionDataEntity.link != null && sectionDataEntity.titleLink != null) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 24),
+        child: TextButtonLinkWebview(
+          title: 'saiba mais',
+          titleWebLink: sectionDataEntity.titleLink,
+          link: sectionDataEntity.link,
+        ),
       );
     }
     return const SizedBox.shrink();
