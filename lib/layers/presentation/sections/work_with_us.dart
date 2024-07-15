@@ -1,6 +1,7 @@
+import 'package:elo7_app/layers/domain/models/entities/section_data_entity.dart';
 import 'package:elo7_app/layers/presentation/components/divider.dart';
 import 'package:elo7_app/layers/presentation/components/image_card.dart';
-import 'package:elo7_app/layers/presentation/components/title_link_webview.dart';
+import 'package:elo7_app/layers/presentation/components/text_button_link_webview.dart';
 import 'package:elo7_app/layers/presentation/components/title_section.dart';
 import 'package:elo7_app/layers/presentation/controller/home_controller.dart';
 import 'package:flutter/material.dart';
@@ -82,10 +83,21 @@ class WorkWithUs extends StatelessWidget {
 
   Widget _buildLinkSection() {
     return Obx(
-      () => TitleLinkWebview(
-        title: 'vagas em aberto',
-        link: controller.workWithUsSection.value.link,
-      ),
+      () {
+        final SectionDataEntity sectionDataEntity =
+            controller.workWithUsSection.value;
+
+        if (sectionDataEntity.titleLink != null &&
+            sectionDataEntity.link != null) {
+          return TextButtonLinkWebview(
+            title: 'vagas em aberto',
+            titleWebLink: sectionDataEntity.titleLink!,
+            link: sectionDataEntity.link,
+          );
+        }
+
+        return const SizedBox.shrink();
+      },
     );
   }
 }

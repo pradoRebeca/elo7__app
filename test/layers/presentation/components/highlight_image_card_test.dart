@@ -1,5 +1,5 @@
 import 'package:elo7_app/layers/presentation/components/image_card.dart';
-import 'package:elo7_app/layers/presentation/components/title_link_webview.dart';
+import 'package:elo7_app/layers/presentation/components/text_button_link_webview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:elo7_app/layers/domain/models/entities/section_data_entity.dart';
@@ -27,7 +27,7 @@ void main() {
     expect(find.byType(ImageCard), findsOneWidget);
     expect(find.text('Título Exemplo'), findsOneWidget);
     expect(find.text('Detalhe do exemplo.'), findsOneWidget);
-    expect(find.byType(TitleLinkWebview), findsOneWidget);
+    expect(find.byType(TextButtonLinkWebview), findsOneWidget);
   });
 
   testWidgets('HighlightImageCard hides image when fileImageName is null',
@@ -112,6 +112,6 @@ void main() {
       ),
     );
 
-    expect(find.byType(TitleLinkWebview), findsNothing);
+    expect(find.byType(TextButtonLinkWebview), findsNothing);
   });
 }

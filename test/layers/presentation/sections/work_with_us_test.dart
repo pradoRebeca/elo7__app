@@ -7,7 +7,7 @@ import 'package:elo7_app/layers/domain/usecases/section_data/section_data_usecas
 import 'package:elo7_app/layers/domain/usecases/section_data/section_data_usecase_impl.dart';
 import 'package:elo7_app/layers/presentation/components/divider.dart';
 import 'package:elo7_app/layers/presentation/components/image_card.dart';
-import 'package:elo7_app/layers/presentation/components/title_link_webview.dart';
+import 'package:elo7_app/layers/presentation/components/text_button_link_webview.dart';
 import 'package:elo7_app/layers/presentation/components/title_section.dart';
 import 'package:elo7_app/layers/presentation/controller/home_controller.dart';
 import 'package:elo7_app/layers/presentation/controller/home_controller_impl.dart';
@@ -68,7 +68,7 @@ void main() {
 
       expect(find.byType(ImageCard), findsNWidgets(1));
       expect(find.byType(TitleSection), findsNWidgets(1));
-      expect(find.byType(TitleLinkWebview), findsNWidgets(1));
+      expect(find.byType(TextButtonLinkWebview), findsNWidgets(1));
       expect(find.text('Somos uma empresa...'), findsNWidgets(1));
       expect(find.byType(CustomDivider), findsNWidgets(1));
     });

@@ -1,6 +1,7 @@
 import 'package:elo7_app/layers/presentation/bindings/initial_binding.dart';
 import 'package:elo7_app/layers/presentation/screens/home_screen.dart';
 import 'package:elo7_app/layers/presentation/screens/splash_screen.dart';
+import 'package:elo7_app/layers/presentation/screens/web_view_screen.dart';
 import 'package:elo7_app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
       initialBinding: InitialBinding(),
       getPages: [
         GetPage(name: '/', page: () => const SplashScreen()),
-        GetPage(name: '/home', page: () => HomeScreen())
+        GetPage(name: '/home', page: () => HomeScreen()),
+        GetPage(name: '/webview', page: () => const WebViewScreen())
       ],
     );
   }

@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class TitleLinkWebview extends StatelessWidget {
-  const TitleLinkWebview({
+class TextButtonLinkWebview extends StatelessWidget {
+  const TextButtonLinkWebview({
     super.key,
     required this.title,
     this.link,
+    this.titleWebLink,
   });
 
   final String title;
+  final String? titleWebLink;
   final String? link;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed('/webview',
+              arguments: {'link': link, 'title': titleWebLink});
+        },
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

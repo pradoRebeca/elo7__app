@@ -11,7 +11,8 @@ final List<SectionDataEntity> workWithUsSection = [
   SectionDataEntity(
     detail:
         'Somos uma empresa criativa, tecnológica, humana e, por isso, completamente única. Nos comprometemos com a construção de um ambiente de trabalho diverso, por isso todas as candidaturas feitas serão consideradas, sem distinção de raça, etnia, religião, identidade de gênero, orientação sexual, nacionalidade, deficiência ou idade. Venha fazer parte!',
-    link: 'https://link1.com',
+    link: 'https://elo7.gupy.io/',
+    titleLink: 'Nossas vagas',
     sectionType: SectionType.workWithUs,
   ),
 ];
@@ -57,7 +58,9 @@ final List<SectionDataEntity> highLightsSection = [
     detail:
         'Podemos realmente transformar a vida de milhares de pessoas ao apoiar pequenos empreendedores e suas famílias. Constatamos aqui a relevância dos diferenciais dos empreendedores do Elo7.',
     title: 'Qualidade de vida',
-    link: '',
+    link:
+        'https://blog.elo7.com.br/categorias/negocio-criativo/historias-de-sucesso',
+    titleLink: 'Nossas histórias',
     sectionType: SectionType.highlight,
   ),
   SectionDataEntity(
