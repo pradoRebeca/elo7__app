@@ -32,6 +32,7 @@ flutter:
   assets:
     - assets/images/highlight/
     - assets/images/sellers/
+    - assets/images/app/
 
   fonts:
     - family: Museo Sans
