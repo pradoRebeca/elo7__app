@@ -41,7 +41,9 @@ class HomeControllerImpl extends GetxController implements HomeController {
   void getSectionData() {
     var workWithUsSectionResponse = _sectionDataUsecase(SectionType.workWithUs);
     workWithUsSection.value =
-        (workWithUsSectionResponse.body as List<SectionDataEntity>).first;
+        (workWithUsSectionResponse.body as List<SectionDataEntity>).isNotEmpty
+            ? (workWithUsSectionResponse.body as List<SectionDataEntity>).first
+            : workWithUsSection.value;
 
     var meetOurTeamSectionResponse =
         _sectionDataUsecase(SectionType.meetOurTeam);
@@ -50,8 +52,11 @@ class HomeControllerImpl extends GetxController implements HomeController {
 
     var sellerStatementSectionResponse =
         _sectionDataUsecase(SectionType.sellerStatement);
-    sellerStatementSection.value =
-        (sellerStatementSectionResponse.body as List<SectionDataEntity>).first;
+    sellerStatementSection.value = (sellerStatementSectionResponse.body
+                as List<SectionDataEntity>)
+            .isNotEmpty
+        ? (sellerStatementSectionResponse.body as List<SectionDataEntity>).first
+        : sellerStatementSection.value;
 
     var highlightSectionResponse = _sectionDataUsecase(SectionType.highlight);
     highlightSection
