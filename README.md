@@ -6,9 +6,14 @@ O Elo7 App  permite que os usuários visualizem informações sobre a empresa, a
 
 ### 📋 Pré-requisitos
 
-* [Flutter](https://docs.flutter.dev/get-started/install)
-* [Dart SDK](https://dart.dev/get-dart) (Ao instalar o flutter o Dart SDK é instalado também) 
+* [Flutter SDK](https://docs.flutter.dev/get-started/install)
+* [Dart SDK](https://dart.dev/get-dart) (Ao instalar o Flutter SDK o Dart SDK é instalado também) 
 * [Emulador](https://developer.android.com/studio/run/managing-avds?hl=pt-br)
+
+Depois de instalar todos os componentes acima, execute flutter doctor no terminal para verificar se o ambiente está configurado corretamente.
+ ```
+   flutter doctor
+ ```
 
 ### 📌 Versão utilizada
 
