@@ -30,7 +30,9 @@ flutter_native_splash:
 
   android_12:
     color: "#fdb933"
-    image: "assets/app/icon.png"
+    image: "assets/app/splash_android_12_plus.png"
+    # fullscreen: true
+    # android_gravity: center_horizontal
 
 
 icons_launcher:
