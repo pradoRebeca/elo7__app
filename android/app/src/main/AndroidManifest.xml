@@ -2,7 +2,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:label="elo7_app"
+        android:label="Elo7"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
