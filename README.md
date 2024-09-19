@@ -23,7 +23,7 @@ Depois de instalar todos os componentes acima, execute flutter doctor no termina
 ### 🔧 Instalação
 
 - Faça o git clone ou donwload desse repositório
-- Procure o local onde o projeto via terminal ou editor de texto (Caso o projeto seja baixado via zip, é necessário extraí-lo antes de procurá-lo)
+- Procure o local onde o projeto foi baixado via terminal ou editor de texto (Caso o projeto seja baixado via zip, será necessário extraí-lo antes de procurá-lo)
 - É necessário rodar flutter pub get para garantir que as dependências sejam instaladas
   ```
    flutter pub get
@@ -50,9 +50,9 @@ Esse comando irá apagar os arquivos mocks gerados pelo Mockito e depois irá re
 
 ## 🛠️ Construído com
 
-* [Flutter](https://flutter.dev/) - O framework web usado
-* [GetX](https://chornthorn.github.io/getx-docs/) - Gerenciador de Estados e Injeção de Ddpendências
-* [Mockito](https://pub.dev/packages/mockito) - Gerador de Mocks para os tests
+* [Flutter](https://flutter.dev/) - Framework web usado
+* [GetX](https://chornthorn.github.io/getx-docs/) - Gerenciador de Estados e Injeção de Dependências
+* [Mockito](https://pub.dev/packages/mockito) - Gerador de Mocks para os testes
 * [Dio](https://pub.dev/packages/dio) - Pacote Http 
 
 
